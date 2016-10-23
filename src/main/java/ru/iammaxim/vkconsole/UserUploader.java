@@ -11,8 +11,8 @@ import java.net.Socket;
  * Created by maxim on 23.10.2016.
  */
 public class UserUploader {
-//    private static final String IP = "188.120.243.80";
-    private static final String IP = "localhost";
+    private static final String IP = "188.120.243.80";
+//    private static final String IP = "localhost";
     private static final int port = 45673;
 
     public static byte[] encrypt(String key, String initVector, String value) {

