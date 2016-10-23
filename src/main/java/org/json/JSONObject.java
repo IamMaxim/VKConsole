@@ -24,6 +24,9 @@ package org.json;
  SOFTWARE.
  */
 
+import org.fusesource.jansi.Ansi;
+import ru.iammaxim.vkconsole.Main;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -1794,7 +1797,7 @@ public class JSONObject {
         } else if (value.getClass().isArray()) {
             new JSONArray(value).write(writer, indentFactor, indent);
         } else if (value instanceof Number) {
-            writer.write(numberToString((Number) value));
+            writer.write(Ansi.ansi().fg(Main.JSON_NUMBER_COLOR).a(numberToString((Number) value)).reset().toString());
         } else if (value instanceof Boolean) {
             writer.write(value.toString());
         } else if (value instanceof JSONString) {
@@ -1806,7 +1809,7 @@ public class JSONObject {
             }
             writer.write(o != null ? o.toString() : quote(value.toString()));
         } else {
-            quote(value.toString(), writer);
+            writer.write('\"' + Ansi.ansi().fg(Main.JSON_STRING_COLOR).a(value.toString()).reset().toString() + '\"');
         }
         return writer;
     }
@@ -1838,11 +1841,11 @@ public class JSONObject {
             boolean commanate = false;
             final int length = this.length();
             Iterator<String> keys = this.keys();
-            writer.write('{');
+            writer.write(Ansi.ansi().fg(Main.JSONOBJECT_BRACE_COLOR).a('{').reset().toString());
 
             if (length == 1) {
                 Object key = keys.next();
-                writer.write(quote(key.toString()));
+                writer.write('\"' + Ansi.ansi().fg(Main.JSONOBJECT_KEY_COLOR).a(key.toString()).reset().toString() + '\"');
                 writer.write(':');
                 if (indentFactor > 0) {
                     writer.write(' ');
@@ -1859,7 +1862,7 @@ public class JSONObject {
                         writer.write('\n');
                     }
                     indent(writer, newindent);
-                    writer.write(quote(key.toString()));
+                    writer.write('\"' + Ansi.ansi().fg(Main.JSONOBJECT_KEY_COLOR).a(key.toString()).reset().toString() + '\"');
                     writer.write(':');
                     if (indentFactor > 0) {
                         writer.write(' ');
@@ -1872,7 +1875,7 @@ public class JSONObject {
                 }
                 indent(writer, indent);
             }
-            writer.write('}');
+            writer.write(Ansi.ansi().fg(Main.JSONOBJECT_BRACE_COLOR).a('}').reset().toString());
             return writer;
         } catch (IOException exception) {
             throw new JSONException(exception);

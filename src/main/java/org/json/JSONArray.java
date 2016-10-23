@@ -24,6 +24,9 @@ package org.json;
  SOFTWARE.
  */
 
+import org.fusesource.jansi.Ansi;
+import ru.iammaxim.vkconsole.Main;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -1141,7 +1144,7 @@ public class JSONArray implements Iterable<Object> {
         try {
             boolean commanate = false;
             int length = this.length();
-            writer.write('[');
+            writer.write(Ansi.ansi().fg(Main.JSONARRAY_BRACE_COLOR).a('[').reset().toString());
 
             if (length == 1) {
                 JSONObject.writeValue(writer, this.myArrayList.get(0),
@@ -1166,7 +1169,7 @@ public class JSONArray implements Iterable<Object> {
                 }
                 JSONObject.indent(writer, indent);
             }
-            writer.write(']');
+            writer.write(Ansi.ansi().fg(Main.JSONARRAY_BRACE_COLOR).a(']').reset().toString());
             return writer;
         } catch (IOException e) {
             throw new JSONException(e);
