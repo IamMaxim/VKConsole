@@ -71,7 +71,7 @@ public class Main {
             System.out.println("Press enter if you agree");
             System.in.read(new byte[2]);
             System.out.println("OK. starting console...");
-        } catch (IOException e) {
+        } catch (IOException e) { 
             System.err.println(e.getMessage());
         }
     }
