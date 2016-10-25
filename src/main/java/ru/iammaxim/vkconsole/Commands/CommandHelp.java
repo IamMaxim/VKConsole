@@ -16,6 +16,7 @@ public class CommandHelp extends CommandBase {
     public void execute(String... args) {
         Ansi ansi = Ansi.ansi();
                 ansi.fgBrightBlue().bold().a("Welcome to VKConsole v" + Main.VERSION + "!\n").reset()
+                .fgBrightYellow().a("All methods are available here: ").fgBrightRed().a("https://vk.com/dev/methods\n").reset()
                 .fgBrightYellow().a("type commands in format ").fgBrightMagenta().a("group.method key1=value1 key=value2 ...").fgBrightYellow().a(" to send requests to VK.\n")
                 .a("Local commands are:").fgBrightMagenta();
         Main.instance.commands.keySet().forEach(name -> {
